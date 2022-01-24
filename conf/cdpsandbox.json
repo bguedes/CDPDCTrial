@@ -1,6 +1,6 @@
 {
   "cdhVersion": "7.1.7",
-  "cmVersion": "7.1.4",
+  "cmVersion": "7.5.4",
   "displayName": "cdptrialsandbox",
   "hostTemplates": [
     {
