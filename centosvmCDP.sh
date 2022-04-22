@@ -193,7 +193,7 @@ mkdir /data
 mkdir /data/dfs
 chmod -R 777 /data
 
-python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox.json
+python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox_with_nifi_kafka_spark.json
 
 sudo usermod cloudera -G hadoop
 sudo -u hdfs hdfs dfs -mkdir /user/cloudera
