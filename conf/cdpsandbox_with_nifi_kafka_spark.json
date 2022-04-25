@@ -1,11 +1,11 @@
 {
     "cdhVersion": "7.1.7",
-    "cmVersion": "7.6.1",
-    "displayName": "OneNodeCluster",
+    "cmVersion": "7.1.4",
+    "displayName": "cdptrialsandbox",
     "hostTemplates": [
         {
-            "cardinality": 1,
-            "refName": "HostTemplate-0-from-YourHostname",
+            "cardinality": 1.0,
+            "refName": "HostTemplate-0-from-cloudera",
             "roleConfigGroupsRefNames": [
                 "hdfs-BALANCER-BASE",
                 "hdfs-DATANODE-BASE",
@@ -33,18 +33,18 @@
         }
     ],
     "instantiator": {
-        "clusterName": "OneNodeCluster",
+        "clusterName": "cdptrialsandbox",
         "hosts": [
             {
-            "hostName":"YourHostname",
-            "hostTemplateRefName":"HostTemplate-0-from-YourHostname"
+            "hostName":"localhost.localdomain",
+            "hostTemplateRefName":"HostTemplate-0-from-cloudera"
             }
         ],
         "lenient": false,
         "variables": [
             {
                 "name": "hive-hive_metastore_database_host",
-                "value": "YourHostname"
+                "value": "localhost.localdomain"
             },
             {
                 "name": "hive-hive_metastore_database_password",
@@ -52,7 +52,7 @@
             },
             {
                 "name": "hue-database_host",
-                "value": "YourHostname"
+                "value": "localhost.localdomain"
             },
             {
                 "name": "hue-database_password",
@@ -91,7 +91,7 @@
         }
     ],
     "repositories": [
-        "https://archive.cloudera.com/p/cdh7/7.1.7.1000/parcels/",
+        "https://archive.cloudera.com/cdh7/7.1.7.0/parcels",
         "https://archive.cloudera.com/p/cfm2/2.1.3.0/redhat7/yum/tars/parcel/"
     ],
     "services": [
