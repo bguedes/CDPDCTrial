@@ -696,85 +696,64 @@
 				}
 			]
 		},
-		{
-			"refName": "hdfs",
-			"serviceType": "HDFS",
-			"serviceConfigs": [{
-					"name": "dfs_replication",
-					"value": "1"
-				},
-				{
-					"name": "core_site_safety_valve",
-					"value": "<property><name>hadoop.proxyuser.zeppelin.groups</name><value>*</value></property><property><name>hadoop.proxyuser.zeppelin.hosts</name><value>*</value></property>"
-				},
-				{
-					"name": "hadoop_security_authentication",
-					"value": "kerberos"
-				},
-				{
-					"name": "hdfs_under_replicated_blocks_thresholds",
-					"value": "{\"warning\":\"never\",\"critical\":\"never\"}"
-				},
-				{
-					"name": "hadoop_secure_web_ui",
-					"value": "true"
-				},
-				{
-					"name": "dfs_encrypt_data_transfer_algorithm",
-					"value": "AES/CTR/NoPadding"
-				},
-				{
-					"name": "hadoop_security_authorization",
-					"value": "true"
-				},
-				{
-					"name": "hdfs_verify_ec_with_topology_enabled",
-					"value": "false"
-				},
-				{
-					"name": "dfs_permissions_supergroup",
-					"value": "etl"
-				},
-				{
-					"name": "enable_ranger_authorization",
-					"value": "true"
-				}
-			],
-			"roleConfigGroups": [{
-					"refName": "hdfs-NAMENODE-BASE",
-					"roleType": "NAMENODE",
-					"base": true
-				},
-				{
-					"refName": "hdfs-SECONDARYNAMENODE-BASE",
-					"roleType": "SECONDARYNAMENODE",
-					"base": true
-				},
-				{
-					"refName": "hdfs-DATANODE-BASE",
-					"roleType": "DATANODE",
-					"configs": [{
-							"name": "dfs_datanode_data_dir_perm",
-							"value": "700"
-						},
-						{
-							"name": "dfs_datanode_port",
-							"value": "1004"
-						},
-						{
-							"name": "dfs_datanode_http_port",
-							"value": "1006"
-						}
-					],
-					"base": true
-				},
-				{
-					"refName": "hdfs-BALANCER-BASE",
-					"roleType": "BALANCER",
-					"base": true
-				}
-			]
-		},
+    {
+      "refName": "hdfs",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "dfs_name_dir_list",
+              "variable": "hdfs-NAMENODE-BASE-dfs_name_dir_list"
+            }
+          ],
+          "refName": "hdfs-NAMENODE-BASE",
+          "roleType": "NAMENODE"
+        },
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "fs_checkpoint_dir_list",
+              "variable": "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list"
+            }
+          ],
+          "refName": "hdfs-SECONDARYNAMENODE-BASE",
+          "roleType": "SECONDARYNAMENODE"
+        },
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "dfs_data_dir_list",
+              "value": "/data/dfs/dn"
+            }
+          ],
+          "refName": "hdfs-DATANODE-BASE",
+          "roleType": "DATANODE"
+        },
+        {
+          "base": true,
+          "refName": "hdfs-BALANCER-BASE",
+          "roleType": "BALANCER"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "dfs_replication",
+          "value": "1"
+        },
+        {
+          "name": "service_health_suppression_hdfs_under_replicated_blocks",
+          "value": "true"
+        },
+        {
+          "name": "service_health_suppression_hdfs_verify_ec_with_topology",
+          "value": "true"
+        }
+      ],
+      "serviceType": "HDFS"
+    },
 		{
 			"refName": "schemaregistry",
 			"serviceType": "SCHEMAREGISTRY",
