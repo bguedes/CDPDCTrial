@@ -22,7 +22,9 @@
         "ranger-RANGER_TAGSYNC-BASE",
         "ranger-RANGER_USERSYNC-BASE",
         "solr-SOLR_SERVER-BASE",
-        "zookeeper-SERVER-BASE"
+        "zookeeper-SERVER-BASE",
+			  "kudu-KUDU_MASTER-BASE",
+			  "kudu-KUDU_TSERVER-BASE"       
       ]
     }
   ],
@@ -93,7 +95,23 @@
       {
         "name": "ranger-rangerusersync_user_password",
         "value": "cloudera123"
-      }
+      },
+      {
+				"name": "kudu-KUDU_MASTER-BASE-fs_data_dirs",
+				"value": "/kudu/mdir"
+			},
+			{
+				"name": "kudu-KUDU_MASTER-BASE-fs_wal_dir",
+				"value": "/kudu/mwal"
+			},
+			{
+				"name": "kudu-KUDU_TSERVER-BASE-fs_data_dirs",
+				"value": "/kudu/tdir"
+			},
+			{
+				"name": "kudu-KUDU_TSERVER-BASE-fs_wal_dir",
+				"value": "/kudu/twal"
+			}      
     ]
   },
   "products": [
@@ -339,6 +357,39 @@
         }
       ],
       "serviceType": "HIVE"
-    }
+    },
+		{
+			"refName": "kudu",
+			"roleConfigGroups": [{
+					"base": true,
+					"configs": [{
+							"name": "fs_wal_dir",
+							"variable": "kudu-KUDU_MASTER-BASE-fs_wal_dir"
+						},
+						{
+							"name": "fs_data_dirs",
+							"variable": "kudu-KUDU_MASTER-BASE-fs_data_dirs"
+						}
+					],
+					"refName": "kudu-KUDU_MASTER-BASE",
+					"roleType": "KUDU_MASTER"
+				},
+				{
+					"base": true,
+					"configs": [{
+							"name": "fs_wal_dir",
+							"variable": "kudu-KUDU_TSERVER-BASE-fs_wal_dir"
+						},
+						{
+							"name": "fs_data_dirs",
+							"variable": "kudu-KUDU_TSERVER-BASE-fs_data_dirs"
+						}
+					],
+					"refName": "kudu-KUDU_TSERVER-BASE",
+					"roleType": "KUDU_TSERVER"
+				}
+			],
+			"serviceType": "KUDU"
+		}    
   ]
 }
