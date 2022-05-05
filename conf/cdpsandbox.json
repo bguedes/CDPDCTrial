@@ -68,7 +68,16 @@
 			"name": "",
 			"rcgRefName": "impala-IMPALAD-1"
 		}],
-		"variables": [{
+		"variables": [
+		      {
+			"name": "hdfs-NAMENODE-BASE-dfs_name_dir_list",
+			"value": "/data/dfs/nn"
+		      },
+		      {
+			"name": "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list",
+			"value": "/data/dfs/snn"
+		      },			
+			{
 				"name": "kudu-KUDU_MASTER-BASE-fs_data_dirs",
 				"value": "/kudu/mdir"
 			},
