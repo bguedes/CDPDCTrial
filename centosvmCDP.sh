@@ -42,13 +42,7 @@ systemctl restart chronyd
 sudo /etc/init.d/network restart
 
 echo "-- Configure networking"
-#PUBLIC_IP=`curl https://api.ipify.org/`
-#hostnamectl set-hostname `hostname -f`
-#sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
 sed -i$(date +%s).bak '/^[^#]*::1/s/^/# /' /etc/hosts
-#sed -i$(date +%s).bak 's/127\.0\.0\.1/& cloudera /' /etc/hosts
-#echo "`host localhost |grep address | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
-#sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
 systemctl disable firewalld
 systemctl stop firewalld
 service firewalld stop
@@ -86,11 +80,6 @@ yum repolist
 ## CM
 yum install -y cloudera-manager-agent cloudera-manager-daemons cloudera-manager-server
 
-#sed -i$(date +%s).bak '/^[^#]*server_host/s/^/# /' /etc/cloudera-scm-agent/config.ini
-#sed -i$(date +%s).bak '/^[^#]*listening_ip/s/^/# /' /etc/cloudera-scm-agent/config.ini
-#sed -i$(date +%s).bak "/^# server_host.*/i server_host=localhost" /etc/cloudera-scm-agent/config.ini
-#sed -i$(date +%s).bak "/^# listening_ip=.*/i listening_ip=127.0.0.1" /etc/cloudera-scm-agent/config.ini
-
 service cloudera-scm-agent restart
 
 ## MariaDB
@@ -116,17 +105,6 @@ mysql -u root < /root/CDPDCTrial/scripts/secure_mariadb.sql
 
 echo "-- Prepare CM database 'scm'"
 /opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm cloudera
-
-## PostgreSQL
-#yum install -y postgresql-server python-pip
-#pip install psycopg2==2.7.5 --ignore-installed
-#echo 'LC_ALL="en_US.UTF-8"' >> /etc/locale.conf
-#sudo su -l postgres -c "postgresql-setup initdb"
-#cat conf/pg_hba.conf > /var/lib/pgsql/data/pg_hba.conf
-#cat conf/postgresql.conf > /var/lib/pgsql/data/postgresql.conf
-#echo "--Enable and start pgsql"
-#systemctl enable postgresql
-#systemctl restart postgresql
 
 ## PostgreSQL see: https://www.postgresql.org/download/linux/redhat/
 yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
@@ -193,7 +171,6 @@ mkdir /data
 mkdir /data/dfs
 chmod -R 777 /data
 
-#python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox_with_nifi_kafka_spark.json
 python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox.json
 
 sudo usermod cloudera -G hadoop
