@@ -99,9 +99,13 @@
   "products": [
     {
       "product": "CDH",
-      "version": "7.1.7-1.cdh7.1.7.p0.15945976",
-      "1.14.0-csa1.7.0.0-cdh7.1.7.0-551-26280481",
-      "2.1.4.0-53"
+      "version": "7.1.7-1.cdh7.1.7.p0.15945976"
+    },
+      "product": "CFM",
+      "version": "2.1.4.0-53"
+    },
+      "product": "CSA",
+      "version": "1.14.0-csa1.7.0.0-cdh7.1.7.0-551-26280481"
     }
   ],
   "repositories": [
