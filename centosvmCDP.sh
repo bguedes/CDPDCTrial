@@ -61,7 +61,8 @@ sudo service network-manager restart
 echo "-- Install CM and MariaDB"
 
 # CM 7
-wget https://archive.cloudera.com/cm7/7.1.4/redhat7/yum/cloudera-manager-trial.repo -P /etc/yum.repos.d/
+#wget https://archive.cloudera.com/cm7/7.1.4/redhat7/yum/cloudera-manager-trial.repo -P /etc/yum.repos.d/
+wget https://archive.cloudera.com/p/cm7/7.5.4/redhat7/yum/cm7_publisher.repo
 
 # MariaDB 10.1
 cat - >/etc/yum.repos.d/MariaDB.repo <<EOF
